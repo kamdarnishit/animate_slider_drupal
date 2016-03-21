@@ -4,8 +4,6 @@ Drupal.behaviors.myBehavior = {
     
         var inputData = settings.views.animateSlider;
 
-        console.log(inputData);
-
         var field_labels = inputData.field_labels;
 
         var outputData = {};
@@ -20,7 +18,6 @@ Drupal.behaviors.myBehavior = {
             details[id]=transitionData;
     }
 
-         console.log(details);   
             
         for(var i=0;i<inputData.count_rows;i++){
             outputData[i] = details;
@@ -28,7 +25,7 @@ Drupal.behaviors.myBehavior = {
         
    $(".anim-slider").animateSlider(
 		 	{
-		 		autoplay	:inputData.$autoplay,
+		 		autoplay	:inputData.$AutoPlay,
 		 		interval	:inputData.$Interval,
 		 		animations 	: outputData,
 		 	});

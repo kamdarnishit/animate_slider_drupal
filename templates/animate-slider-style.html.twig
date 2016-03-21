@@ -5,30 +5,29 @@
 */
 #}
 
-{#{{ kint(row) }}
-
-{% for row in rows %}
-  <div class="card-container">
-   {{ row }}
-  </div>
-{% endfor %}#}
-
-
 <ul class="anim-slider">
-    
+
+
     {% for item in data %}
-    <li class="anim-slide">
-        <div id="animate-{{item.image.label}}">
-            {{item.image.value}}
-        </div>
-            
-            <div id="animate-text">
-            <p id="animate-{{item.caption.label}}">{{item.caption.value}}</p>
+
+        <li class="anim-slide">
+            <div id="animate-{{item.image.label}}">
+                {{item.image.value}}
             </div>
-    </li>
+
+            <div class="animate-caption" id="animate-{{item.caption.label}}">
+                {{item.caption.value}}
+            </div>
+
+
+            <div class="animate-bodycaption" id="animate-{{item.bodycaption.label}}">
+                {{item.bodycaption.value}}
+            </div>
+
+        </li>
     {% endfor %}
-    
-    
+
+
     <!-- Arrows -->
     <nav class="anim-arrows">
         <span class="anim-arrows-prev"></span>

@@ -119,6 +119,7 @@ class AnimateSlider extends StylePluginBase {
             '#default_value' => (isset($this->options[$field_labels[$i]]['show_transition'])) ?
                     $this->options[$field_labels[$i]]['show_transition'] : $this->options[$field_labels[$i]]['show_transition'],
             '#options' => [
+                '' => $this->t('- NONE -'),
                 'Slide Effects' => [
                     'slideInDown' => $this->t('slideInDown'),
                     'slideInLeft' => $this->t('slideInLeft'),
@@ -383,45 +384,46 @@ class AnimateSlider extends StylePluginBase {
      * {@inheritdoc}
      */
     public function render() {
-
-        dsm($this->view);
-        
+    
         $field_labels = $this->displayHandler->getFieldLabels(TRUE);
 
         $field_labels = array_keys($field_labels);
 
-        dsm($field_labels,'label');
-        
         for ($i = 0; $i < count($this->view->result); $i++) {
             for ($j = 0; $j < count($field_labels); $j++) {
                 $field_item_list = $this->view->result[$i]->_entity->get($field_labels[$j]);
                 $field_type = $field_item_list->getFieldDefinition()->getType();
-                dsm($field_type,'type');
                 
                 if ($field_type == string) {
-                    $caption[$i] = array('value'=>$field_item_list->getValue(),'label'=>$field_labels[$j]);
+                    //$caption[$i] = array('value'=>$field_item_list->getValue(),'label'=>$field_labels[$j]);
+                    $caption[$i] = array('value'=>$this->view->style_plugin->getField($i, $field_labels[$j]),'label'=>$field_labels[$j]);
                 } elseif ($field_type == image) {
-                    $image[$i] = array('value'=>$this->view->style_plugin->getField($i, 'field_slide'),'label'=>$field_labels[$j]);
+                    $image[$i] = array('value'=>$this->view->style_plugin->getField($i, $field_labels[$j]),'label'=>$field_labels[$j]);
                     //$image[$i]['label'] = $field_labels[$j];
+                } elseif($field_type == text_with_summary ){
+                     $body_caption[$i] = array('value'=>$this->view->style_plugin->getField($i,$field_labels[$j]),'label'=>$field_labels[$j]);
                 }
             }
         }
 
-        dsm($caption,'cap');
-        dsm($image,'img');
-
+        
+        
         $item = new \stdClass();
 
         $item->image = $image;
         $item->caption = $caption;
+        $item->bodycaption = $body_caption;
         $item->labels = $field_labels;
 
 
         for ($i = 0; $i < count($image); $i++) {
-            $item->data[$i] = array('image' =>array('value'=>$item->image[$i]['value'],'label'=>$item->image[$i]['label']), 'caption' => array('value'=>$item->caption[$i]['value'][0]['value'],'label'=>$item->caption[$i]['label']));
+            $item->data[$i] = array('image' =>array('value'=>$item->image[$i]['value'],'label'=>$item->image[$i]['label']), 
+                                    'caption' => array('value'=>$item->caption[$i]['value'],'label'=>$item->caption[$i]['label']),
+                                    'bodycaption' => array('value'=>$item->bodycaption[$i]['value'],'label'=>$item->bodycaption[$i]['label'])              
+                );
         }
-        dsm($item->data);
 
+        
         $build = array(
             '#theme' => $this->themeFunctions(),
             '#view' => $this->view,

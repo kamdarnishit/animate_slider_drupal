@@ -27,6 +27,24 @@ and open the template in the editor.
     color:white;
     font-size: 30px;
     top: 50%;
-    left: -25%;
-    
+    left: -25%;   
+}
+
+.animate-caption a,.animate-bodycaption p{
+    height: auto;
+    width: auto;
+}
+
+.animate-caption a{
+        font-size: 30px;
+    color: white;
+    top: 30%;
+    left: -13%;
+}
+
+.animate-bodycaption{
+    width:auto;
+    height: auto;
+    top: 50%;
+    left: -13%;
 }
