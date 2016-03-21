@@ -1,0 +1,38 @@
+{#
+/**
+* @file
+* Template for the cards style.
+*/
+#}
+
+{#{{ kint(row) }}
+
+{% for row in rows %}
+  <div class="card-container">
+   {{ row }}
+  </div>
+{% endfor %}#}
+
+
+<ul class="anim-slider">
+    
+    {% for item in data %}
+    <li class="anim-slide">
+        <div id="animate-{{item.image.label}}">
+            {{item.image.value}}
+        </div>
+            
+            <div id="animate-text">
+            <p id="animate-{{item.caption.label}}">{{item.caption.value}}</p>
+            </div>
+    </li>
+    {% endfor %}
+    
+    
+    <!-- Arrows -->
+    <nav class="anim-arrows">
+        <span class="anim-arrows-prev"></span>
+        <span class="anim-arrows-next"></span>
+    </nav>
+
+</ul>

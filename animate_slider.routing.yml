@@ -1,0 +1,7 @@
+animate_slider:
+  path: '/animate'
+  defaults:
+    _title: 'animate_slider'
+    _controller: '\Drupal\animate_slider\Controller\AnimateSliderController::animate'
+  requirements:
+    _permission: 'access content'

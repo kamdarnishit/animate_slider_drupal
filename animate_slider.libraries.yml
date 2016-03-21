@@ -1,0 +1,14 @@
+animate_slider:
+  js:
+    /libraries/animate-slider/src/jquery.animateSlider.js: {}
+    js/modernizr.js: {}
+    js/script.js: {}
+  css:
+    component:
+      /libraries/animate-slider/assets/jquery.animateSlider.css: {}
+      style/animateSlider.css: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/drupalSettings
+    - core/jquery.once

@@ -1,0 +1,12 @@
+name: 'Animate Slider'
+description: 'Animate Slider for Drupal 8'
+type: module
+package: 'custom'
+# core: 8.x
+# Information added by Drupal.org packaging script on 2016-02-16
+version: '8.x-1.x-dev'
+core: '8.x'
+libraries:
+  - animate_slider/animate_slider
+project: 'custom'
+datestamp: 1455587957
