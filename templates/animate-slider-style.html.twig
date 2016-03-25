@@ -7,22 +7,35 @@
 
 <ul class="anim-slider">
 
-
+    
     {% for item in data %}
 
+        
         <li class="anim-slide">
+            
+            {% if item.image %}
             <div id="animate-{{item.image.label}}">
                 {{item.image.value}}
             </div>
+            {% endif %}
 
-            <div class="animate-caption" id="animate-{{item.caption.label}}">
-                {{item.caption.value}}
+            {% if item.string %}
+            <div class="animate-caption" id="animate-{{item.string.label}}">
+                {{item.string.value}}
             </div>
-
-
-            <div class="animate-bodycaption" id="animate-{{item.bodycaption.label}}">
-                {{item.bodycaption.value}}
+            {% endif %}
+                
+            {% if item.text_with_summary.value %}
+            <div class="animate-bodycaption" id="animate-{{item.text_with_summary.label}}">
+                {{item.text_with_summary.value}}
             </div>
+            {% endif %}
+            
+            {% if item.link %}
+            <div class="animate-link" id="animate-{{item.link.label}}">
+                {{item.link.value}}
+            </div>
+           {% endif %}
 
         </li>
     {% endfor %}

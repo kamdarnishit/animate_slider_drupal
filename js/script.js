@@ -4,6 +4,8 @@ Drupal.behaviors.myBehavior = {
     
         var inputData = settings.views.animateSlider;
 
+        console.log(inputData);
+
         var field_labels = inputData.field_labels;
 
         var outputData = {};
@@ -14,7 +16,7 @@ Drupal.behaviors.myBehavior = {
         
         for(var i=0;i<inputData.field_labels.length;i++){
             id='#animate-'+field_labels[i];
-            var transitionData = {show:inputData.transitions[field_labels[i]].$showTransition,hide:inputData.transitions[field_labels[i]].$hideTransition,delayShow : "delay1s"}
+            var transitionData = {show:inputData.transitions[field_labels[i]].$showTransition,hide:'rotateOut',delayShow : "delay"+inputData.transitions[field_labels[i]].delay+"s"};
             details[id]=transitionData;
     }
 
@@ -23,11 +25,15 @@ Drupal.behaviors.myBehavior = {
             outputData[i] = details;
         }
         
-   $(".anim-slider").animateSlider(
+        
+        //console.log(inputData);
+        console.log(outputData);
+        
+        $(".anim-slider").animateSlider(
 		 	{
-		 		autoplay	:inputData.$AutoPlay,
-		 		interval	:inputData.$Interval,
-		 		animations 	: outputData,
+		 		autoplay	: inputData.autoplay,
+		 		interval	: inputData.interval,
+		 		animations 	: outputData
 		 	});
   }
 };

@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Views vertical_tabs style plugin code.
+ * Views Animate Slider style plugin code.
  */
 
 use Drupal\Component\Utility\Html;
@@ -11,37 +11,33 @@ use Drupal\Core\Render\Element\RenderElement;
 use Drupal\Core\Form\FormState;
 
 /**
- * Implements hook_preprocess_HOOK() for theme_views_view_vertical_tabs().
+ * Implements hook_preprocess_HOOK() for theme_animate_slider_style().
  */
 function template_preprocess_animate_slider_style(&$variables) {
   /** @var \Drupal\views\ViewExecutable $view */
     
   $view = $variables['view'];
-  
   $item = $variables['rows'];
   
   $style = $view->style_plugin;
   $options = $style->options;
-  
-  $variables['image'] = $item->image;
-  $variables['caption'] = $item->caption;
-  $variables['data'] = $item->data;
-  
-  //$count_rows = count($item);
-  
+
+  $variables['data'] = $item->renderData;
+
   $count_rows = count($view->result);
   
-  $field_labels = $view->display_handler->getFieldLabels(TRUE);
-  $field_labels = array_keys($field_labels);
+  $field_labels = array_keys($view->display_handler->getFieldLabels(TRUE));
   
   $settings = [];
   
-  $settings['$AutoPlay'] = ($options['global']['autoplay']) ? TRUE : FALSE;
-  $settings['$Interval'] = isset($options['global']['interval']) ? (int) $options['global']['interval'] : 5000;
-  
+  $settings['autoplay'] = isset($options['global']['autoplay']) ? TRUE : FALSE;
+  $settings['interval'] = isset($options['global']['interval']) ? (int) $options['global']['interval'] : 5000;
+
   for($i=0;$i<count($field_labels);$i++){
+      
   $settings['transitions'][$field_labels[$i]]['$showTransition'] = isset($options[$field_labels[$i]]['show_transition']) ? $options[$field_labels[$i]]['show_transition'] : 'slideInLeft';
   $settings['transitions'][$field_labels[$i]]['$hideTransition'] = isset($options[$field_labels[$i]]['hide_transition']) ? $options[$field_labels[$i]]['hide_transition'] : 'slideOutLeft';
+  $settings['transitions'][$field_labels[$i]]['delay'] = isset($options[$field_labels[$i]]['delay']) ?(int)$options[$field_labels[$i]]['delay'] : 1;
   }
   $settings['field_labels'] = $field_labels;
   
@@ -49,10 +45,6 @@ function template_preprocess_animate_slider_style(&$variables) {
 
   $view->element['#attached']['drupalSettings']['views']['animateSlider'] = $settings;
            
-//  $style = $view->style_plugin;
-//  $options = $style->options;
-//  $group = $view->storage->id() . '-' . $view->current_display;
-//  
-   $view->element['#attached']['library'][] = 'animate_slider/animate_slider';
+  $view->element['#attached']['library'][] = 'animate_slider/animate_slider';
 
 }
