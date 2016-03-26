@@ -61,6 +61,8 @@ class AnimateSlider extends StylePluginBase {
 
         $field_labels = array_keys($this->displayHandler->getFieldLabels(TRUE));
 
+
+
         $form['global'] = array(
             '#type' => 'fieldset',
             '#title' => 'Global',
@@ -331,7 +333,6 @@ class AnimateSlider extends StylePluginBase {
                         'zoomOut' => $this->t('zoomOut'),
                         'zoomOutUp' => $this->t('zoomOutUp'),
                         'zoomOutUpBig' => $this->t('zoomOutUpBig'),
-                        'zoomOutUpBig' => $this->t('zoomOutUpBig'),
                         'zoomOutUpLarge' => $this->t('zoomOutUpLarge'),
                         'zoomOutDownBig' => $this->t('zoomOutDownBig'),
                         'zoomOutDownLarge' => $this->t('zoomOutDownLarge'),
@@ -379,6 +380,7 @@ class AnimateSlider extends StylePluginBase {
      */
     public function render() {
 
+
         $field_labels = array_keys($this->displayHandler->getFieldLabels(TRUE));
 
         for ($i = 0; $i < count($this->view->result); $i++) {
@@ -392,9 +394,7 @@ class AnimateSlider extends StylePluginBase {
         }
 
         $item = new \stdClass();
-        
-        dsm($renderData);
-        
+
         if (isset($renderData)) {
             $item->renderData = $renderData;
         }
